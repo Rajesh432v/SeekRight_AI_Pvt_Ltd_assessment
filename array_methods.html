@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Implement map, reduce, filter, and flatMap using JavaScript.</h1>
+    <h2>You can see the answer in the console</h2>
+
+    <script>
+Array.prototype.myMap = function (callback) {
+    const result = [];
+    for (let i = 0; i < this.length; i++) {
+      result.push(callback(this[i], i, this));
+    }
+    return result;
+  };
+  
+  Array.prototype.myReduce = function (callback, initialValue) {
+    let accumulator = initialValue;
+    for (let i = 0; i < this.length; i++) {
+      accumulator = callback(accumulator, this[i], i, this);
+    }
+    return accumulator;
+  };
+  
+  Array.prototype.myFilter = function (callback) {
+    const result = [];
+    for (let i = 0; i < this.length; i++) {
+      if (callback(this[i], i, this)) {
+        result.push(this[i]);
+      }
+    }
+    return result;
+  };
+  
+  Array.prototype.myFlatMap = function (callback) {
+    return this.myMap(callback).flat();
+  };
+    const numbers = [1, 2, 3, 4, 5];
+    console.log('myMap:', numbers.myMap((num) => num * 2));
+  
+  console.log('myReduce:', numbers.myReduce((acc, num) => acc + num, 0));
+    console.log('myFilter:', numbers.myFilter((num) => num > 2));
+    const nested = [[1, 2], [3, 4], [5]];
+  console.log('myFlatMap:', nested.myFlatMap((arr) => arr.map((x) => x * 2)));
+  
+    </script>
+</body>
+</html>
